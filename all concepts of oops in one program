@@ -1,0 +1,146 @@
+#include <iostream>
+using namespace std;
+//  constructor and destructor
+class Value
+{
+public:
+    int a;
+    Value()
+    {
+        a = 5;
+        cout << "\nDefault Constructor value: " << a;
+    }
+    Value(int x)
+    {
+        a = x;
+        cout << "\nParameterised Constructor value: " << a;
+    }
+    ~Value()
+    {
+        static int c;
+        c++;
+        cout << "\nDestructor called "<<c;
+    }
+};
+// Operator overloading 
+class compare_string
+{
+private:
+    string x;
+public:
+    void get_Value()
+    {
+        cout << "\nEnter string :";
+        getline(cin, x);
+    }
+    int operator==(compare_string &m)
+    {
+        if (x == m.x)
+            return 1;
+        else
+            return 0;
+    }
+};
+// Function overloading 
+void Calc(int a)
+{
+    cout << "\nCube : " << a * a* a;
+}
+void Calc(int a, int b)
+{
+    cout << "\nMultiplication : " << a * b;
+}
+// Inheritance and virtual function
+class Base
+{
+protected:
+    int a;
+public:
+    Base()
+    {
+        a=15;
+    }
+    virtual void Show_Value() = 0;
+};
+class Base1 : virtual public Base
+{
+protected:
+    int b;
+public:
+    Base1()
+    {
+        b = 26;
+    }
+};
+class Derived : virtual public Base
+{
+protected:
+    int c;
+public:
+    Derived()
+    {
+        c = 2;
+    }
+};
+class Derived1 : public Base1, public Derived
+{
+protected:
+    int d;
+public:
+    Derived1()
+    {
+        d = 4;
+    }
+    void Show_Value()
+    {
+        cout << "\nA: " << a;
+        cout << "\nB: " << b;
+        cout << "\nC: " << c;
+        cout << "\nD: " << d;
+    }
+};
+// Template 
+template <class T>
+class Template
+{
+public:
+    T *a;
+    void BubbleSort(T *x, int n)
+    {
+        a=x;
+        int i, j;
+        T temp;
+        for (i = 0; i < n; i++)
+        {
+            for (j = i + 1; j < n; j++)
+            {
+                if (a[i] > a[j])
+                {
+                    temp = a[i];
+                    a[i] = a[j];
+                    a[j] = temp;
+                }
+            }
+        }
+        cout << "\nSorted Array: ";
+        for (i = 0; i < n; i++)
+        cout << a[i]<<"\t";
+    }
+};
+int main()
+{
+    int ch;
+    while (1)
+    {
+        cout << "\n1.Constructor and Destructor";
+        cout << "\n2.Operator Overloading";
+        cout << "\n3.Function Overloading";
+        cout << "\n4.Inheritance";
+        cout << "\n5.Template";
+        cout << "\n6.Quit"<<endl;
+        cout << "Enter choice: ";
+        cin >> ch;
+        if (ch == 1)
+        {
+            Value s1, s2(10), s3(s1);
+        }
